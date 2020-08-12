@@ -6,6 +6,7 @@ let allJobs;
 const app = document.querySelector('#app');
 
 
+
 async function getJobs(){
     try{
       const result = await fetch('./data.json');
@@ -91,8 +92,29 @@ async function getJobs(){
       }
       
     }
-  });
+  }).then(()=>{
+    const AllLiItems = document.querySelectorAll('.language-filter li');
 
+    let filterMenu = document.querySelector('.filter-menu');
+
+    let items = [];
+
+    for(let i=0;i<AllLiItems.length;i++){
+      AllLiItems[i].addEventListener('click', (e)=>{
+        //console.log(e.target.textContent);
+
+        items.push(e.target.textContent);
+        console.log(items);
+
+       //filterMenu.appendChild(e.target);
+
+
+              //placeItemsInFilterMenu(e);
+
+              filterItems(items);
+      })
+    } 
+  });
 
 
 
@@ -103,74 +125,32 @@ async function getJobs(){
     console.log(job[0].children[0].children[0]);
   }
 
-// let langTools;
 
-//   async function insertLanguageAndTools(){
-//     try{
-//       const result = await fetch('./data.json');
-  
-//       allJobs = await result.json();
-      
-//       for(let i=0;i<allJobs.length;i++){ 
+  // function placeItemsInFilterMenu(e){
+    
+  //   const filterMenu = document.querySelector('.filter-menu');
+  //   const ul = document.createElement('UL');
+  //   const li= document.createElement('LI');
 
-//         const logo = allJobs[i].logo;
-//         const company = allJobs[i].company;
-//         const position = allJobs[i].position;
-        
-//         let newJob = allJobs[i].new;
-//         let featured = allJobs[i].featured;
+  //   li.appendChild(e.target.textContent);
 
-//         if(newJob === true){
-//           newJob = 'NEW!'
-//         }else{
-//           newJob = '';
-//         }
+  //   ul.appendChild(li);
+  //   filterMenu.appendChild(ul);
+  // }
 
-//         if(featured === true){
-//           featured = 'FEATURED'
-//         }else{
-//           featured = ''; 
-//         }
 
-//         // let test;
 
-//         // for(let j=0;j<allJobs[i].languages.length;j++){
-          
-//         //   test= allJobs[i].languages[j];
-//         //   console.log(test);
 
-//         //   const satan = document.createElement('LI');
-//         //   satan.innerHTML=`
-          
-//         //   `
-//         // }
+  function filterItems(x){
 
-//         const li = document.createElement('LI');
-//         li.classList.add('job-overview');
-//         li.innerHTML=
-//         `
-//             <img src="${logo}" alt="" class="job-logo">
-//             <div class="job-description">
-//               <h2 class="job-description-company">${company}<span>${newJob}</span><span>${featured}</span></h2>
-//               <h1 class="job-description-position">${position}</h1>
-//               <ul class="job-description-extra">
-//                   <li class="job-description-extra-item">${allJobs[i].postedAt}</li>
-//                   <li class="job-description-extra-item">${allJobs[i].contract}</li>
-//                   <li class="job-description-extra-item">${allJobs[i].location}</li>
-//               </ul>
-//             </div>
+    //let a = x.indexOf('Frontend');
 
-//             <div>
-//               <ul class="language-filter">
-//               </ul>
-//             </div>
-//         `
-//         app.appendChild(li);  
-//     }
-
-//       removeEmptySpan();
-
-//     }catch(error){
-//       console.log(`sorry, could not load jobs because of ${error}`);
-//     }
-//   }
+    let a = x;
+    
+    if(a[a.length -1] === 'Frontend'){
+      console.log(true);
+    }else{
+      console.log(false);
+    }
+    
+  }

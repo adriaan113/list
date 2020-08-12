@@ -46,8 +46,13 @@ body{
             color: $font3;
             border: none;
             background-color: transparent;
+            border-bottom: 2px solid transparent;
             font-size: 1.1rem;
             font-weight: bold;
+            &:hover{
+                color: $font1;
+                border-bottom: 2px solid $font1;
+            }
         }
     }
     #app{
@@ -58,13 +63,10 @@ body{
             position: relative;
             background-color: $filter;
             margin: 4rem 1rem;
-             border-left: .5rem solid transparent;
+            border-left: .5rem solid transparent;
             border-radius: $b-radius;
             padding: 1rem 0;
             box-shadow: 5px 5px 15px lighten($bgheader,25%);
-            // &:first-child{
-            //     //margin-top: 3.5rem;
-            // }
             &:hover{
                 border-left: .5rem solid $bgheader;
             }
@@ -95,6 +97,10 @@ body{
                 &-position{
                     font-size: 1.2rem;
                     color: $font2;
+                    cursor: pointer;
+                    &:hover{
+                        color: $font1;
+                    }
                 }
                 &-extra{
                     background-color: $filter;
@@ -129,6 +135,11 @@ body{
                 background-color: darken($bglist,7%);
                 border-radius: $b-radius;
                 padding: .5rem;
+                cursor: pointer;
+                &:hover{
+                    color: $bglist;
+                    background-color: $font1;
+                }
 
             }
         }
@@ -136,4 +147,3 @@ body{
     
 }
 
-//border-left: .5rem solid $bgheader;
