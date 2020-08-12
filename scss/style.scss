@@ -58,13 +58,16 @@ body{
             position: relative;
             background-color: $filter;
             margin: 4rem 1rem;
-            border-left: .5rem solid $bgheader;
+             border-left: .5rem solid transparent;
             border-radius: $b-radius;
             padding: 1rem 0;
             box-shadow: 5px 5px 15px lighten($bgheader,25%);
             // &:first-child{
             //     //margin-top: 3.5rem;
             // }
+            &:hover{
+                border-left: .5rem solid $bgheader;
+            }
             .job-logo{
                 position: absolute;
                 display: block;
@@ -132,3 +135,5 @@ body{
     }
     
 }
+
+//border-left: .5rem solid $bgheader;
