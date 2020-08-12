@@ -9,7 +9,7 @@ $font1: hsl(180, 8%, 52%);
 $font2: hsl(180, 14%, 20%);
 $font3: hsl(136, 0%, 75%);
 
-
+$b-radius: 5px;
 
 
 *{
@@ -33,33 +33,33 @@ body{
             width: 100%;
         }
     }
+    .filter-menu{
+        display: flex;
+        justify-content: flex-end;
+        background-color: $filter;
+        margin: 4rem 1rem;
+        border-radius: $b-radius;
+        padding: 1rem;
+        box-shadow: 5px 5px 15px lighten($bgheader,25%);
+
+        button{
+            color: $font3;
+            border: none;
+            background-color: transparent;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+    }
     #app{
         background-color: darken($bglist,7%);
         padding: 0;
         list-style: none;
-        .filter-menu{
-            display: flex;
-            justify-content: flex-end;
-            background-color: $filter;
-            margin: 4rem 1rem;
-            border-radius: 5px;
-            padding: 1rem;
-            box-shadow: 5px 5px 15px lighten($bgheader,25%);
-
-            button{
-                color: $font3;
-                border: none;
-                background-color: transparent;
-                font-size: 1.1rem;
-                font-weight: bold;
-            }
-        }
         .job-overview{
             position: relative;
             background-color: $filter;
             margin: 4rem 1rem;
             border-left: .5rem solid $bgheader;
-            border-radius: 5px;
+            border-radius: $b-radius;
             padding: 1rem 0;
             box-shadow: 5px 5px 15px lighten($bgheader,25%);
             // &:first-child{
@@ -112,6 +112,22 @@ body{
                 }
             }
 
+        }
+        .language-filter{
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-flow: row wrap;
+            gap: 1rem;
+            margin: .5rem 1.5rem;
+            li{
+                color: $font1;
+                font-weight: bold;
+                background-color: darken($bglist,7%);
+                border-radius: $b-radius;
+                padding: .5rem;
+
+            }
         }
     }
     
