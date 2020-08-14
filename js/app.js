@@ -5,7 +5,7 @@
 let allJobs;
 const app = document.querySelector('#app');
 
-
+let items = [];
 
 async function getJobs(){
     try{
@@ -94,63 +94,54 @@ async function getJobs(){
     }
   }).then(()=>{
     const AllLiItems = document.querySelectorAll('.language-filter li');
-
-    let filterMenu = document.querySelector('.filter-menu');
-
-    let items = [];
+    const filterMenu = document.querySelector('.filter-menu');
+    const ul = document.createElement('UL');
 
     for(let i=0;i<AllLiItems.length;i++){
       AllLiItems[i].addEventListener('click', (e)=>{
-        //console.log(e.target.textContent);
-
-        items.push(e.target.textContent);
-        console.log(items);
-
-       //filterMenu.appendChild(e.target);
-
-
-              //placeItemsInFilterMenu(e);
-
-              filterItems(items);
+      let li= document.createElement('LI');
+      li.textContent = e.target.textContent;
+      ul.appendChild(li);
+      filterMenu.appendChild(ul);
+      items.push(e.target.textContent);
       })
     } 
+    console.log(items);
+  }).then(()=>{
+    displayFilterItems();
   });
 
+  function displayFilterItems() {
+
+    const filter = document.querySelector('.filter-menu');
+    const cardItems = document.querySelectorAll('.language-filter');
+
+    for(let i=0;i<cardItems.length;i++){
+      cardItems[i].addEventListener('click', (e)=>{
+      filter.children[1] += e.target;
+      compareFilterResults(e);
+     });
+   }
+  };
 
 
+  function compareFilterResults(e){
+
+    const cardItems = document.querySelectorAll('.language-filter');
+
+    for(let i=0;i<cardItems.length;i++){
+      for(let j=0;j<cardItems[i].children.length;j++){
+         if(e.target.textContent === cardItems[i].children[j].textContent){
+          cardItems[i].children[j].parentElement.parentNode.parentNode.style.display = 'none';
+        }else{
+          console.log('too fucking bad');
+        }
+      }
+    }
+  }
 
   function removeEmptySpan(){
     const job= document.querySelectorAll('.job-description');
 
     console.log(job[0].children[0].children[0]);
-  }
-
-
-  // function placeItemsInFilterMenu(e){
-    
-  //   const filterMenu = document.querySelector('.filter-menu');
-  //   const ul = document.createElement('UL');
-  //   const li= document.createElement('LI');
-
-  //   li.appendChild(e.target.textContent);
-
-  //   ul.appendChild(li);
-  //   filterMenu.appendChild(ul);
-  // }
-
-
-
-
-  function filterItems(x){
-
-    //let a = x.indexOf('Frontend');
-
-    let a = x;
-    
-    if(a[a.length -1] === 'Frontend'){
-      console.log(true);
-    }else{
-      console.log(false);
-    }
-    
-  }
+  };
