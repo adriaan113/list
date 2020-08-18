@@ -106,9 +106,10 @@ async function getJobs(){
       items.push(e.target.textContent);
       })
     } 
-    console.log(items);
+    //console.log(items);
   }).then(()=>{
     displayFilterItems();
+    clearFilter();
   });
 
   function displayFilterItems() {
@@ -119,6 +120,7 @@ async function getJobs(){
     for(let i=0;i<cardItems.length;i++){
       cardItems[i].addEventListener('click', (e)=>{
       filter.children[1] += e.target;
+      filter.insertBefore(filter.children[1], filter.childNodes[0]);
       compareFilterResults(e);
      });
    }
@@ -145,3 +147,42 @@ async function getJobs(){
 
     console.log(job[0].children[0].children[0]);
   };
+
+
+  function clearFilter(){
+    clearBtn = document.querySelector('.filter-menu button');
+
+    clearBtn.addEventListener('click', ()=>{
+      const list= document.querySelectorAll('.filter-menu ul li'); 
+      const ul= document.querySelector('.filter-menu ul');
+      for(let item of list){
+        ul.removeChild(item);
+        //resetCards();
+      }
+    })
+  } 
+
+  // function resetCards(){
+
+  //   const ul= document.querySelectorAll('.language-filter')
+  //   let li;
+
+  //   for(let i=0;i<ul.length;i++){
+
+  //     for(let j=0;j<allJobs[i].languages.length;j++){
+
+  //       liLanguage= document.createElement('LI');
+  //       liLanguage.innerHTML=`${allJobs[i].languages[j]}`
+  //       ul[i].appendChild(liLanguage);
+  //     }
+
+  //     for(let j=0;j<allJobs[i].tools.length;j++){
+
+  //       liTools= document.createElement('LI');
+  //       liTools.innerHTML=`${allJobs[i].tools[j]}`
+  //       ul[i].appendChild(liTools);
+  //     }
+      
+   // }
+
+  //}// het moet dus zo zijn dat de cards weer terugfloepen als je clear drukt
