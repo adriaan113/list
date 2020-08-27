@@ -7,6 +7,10 @@ const app = document.querySelector('#app');
 
 let items = [];
 
+
+let above=[];
+let down=[];
+
 async function getJobs(){
     try{
       const result = await fetch('./data.json');
@@ -109,7 +113,8 @@ async function getJobs(){
     //console.log(items);
   }).then(()=>{
     displayFilterItems();
-    clearFilter();
+    clearFilter(); 
+    // resetCards();
   });
 
   function displayFilterItems() {
@@ -130,23 +135,61 @@ async function getJobs(){
   function compareFilterResults(e){
 
     const cardItems = document.querySelectorAll('.language-filter');
+    const test = document.querySelector('.filter-menu');
+
+    
+    let satan = [];
+  //  console.log(test.children[0].children.length);
+
+    for(let i of test.children[0].children){
+      satan.push(i);
+      //console.log(i.textContent);
+    }
+
+    for(let i of satan){
+     // console.log(i.textContent);
+    }
+
+
+
+    // let above=[];
+    // let down=[];
 
     for(let i=0;i<cardItems.length;i++){
+     // console.log(cardItems[i]);
       for(let j=0;j<cardItems[i].children.length;j++){
-         if(e.target.textContent === cardItems[i].children[j].textContent){
-          cardItems[i].children[j].parentElement.parentNode.parentNode.style.display = 'none';
-        }else{
-          console.log('too fucking bad');
+        //console.log(cardItems[i].children[j]);
+        down.push(cardItems[i].children[j]);
+      }
+    }
+    
+    for(let x =0;x<test.children[0].children.length;x++){
+      //console.log(test.children[0].children[x]);
+      above.push(test.children[0].children[x]);
+    }
+
+
+
+    for(let i=0;i<above.length;i++){
+      for(let j=0;j<down.length;j++){
+        if(above[i].textContent === down[j].textContent){
+
+
+          down[j].parentNode.parentNode.parentNode.style.backgroundColor = 'pink';
+          //down[j].parentNode.parentNode.parentNode.style.display = 'block';
+
+          
+          
+        }else if(above[i].textContent !== down[j].textContent &&  down[j].parentNode.parentNode.parentNode.style.backgroundColor !== 'pink'){
+      
+          down[j].parentNode.parentNode.parentNode.style.backgroundColor = 'lightgreen';
+          //down[j].parentNode.parentNode.parentNode.style.display = 'none';
+  
         }
       }
     }
   }
 
-  function removeEmptySpan(){
-    const job= document.querySelectorAll('.job-description');
-
-    console.log(job[0].children[0].children[0]);
-  };
 
 
   function clearFilter(){
@@ -157,32 +200,53 @@ async function getJobs(){
       const ul= document.querySelector('.filter-menu ul');
       for(let item of list){
         ul.removeChild(item);
-        //resetCards();
       }
+       resetCards();
     })
   } 
 
-  // function resetCards(){
+  function resetCards(){
+    const clearBtn = document.querySelector('.filter-menu button');
+    const app = document.querySelector('#app');
+    const cardItems = document.querySelectorAll('.language-filter');
 
-  //   const ul= document.querySelectorAll('.language-filter')
-  //   let li;
 
-  //   for(let i=0;i<ul.length;i++){
+    while(above.length>0){
+      above.pop();
+    }
+    while(down.length>0){
+      down.pop();
 
-  //     for(let j=0;j<allJobs[i].languages.length;j++){
+    }
 
-  //       liLanguage= document.createElement('LI');
-  //       liLanguage.innerHTML=`${allJobs[i].languages[j]}`
-  //       ul[i].appendChild(liLanguage);
-  //     }
+    if(down.length === 0){
 
-  //     for(let j=0;j<allJobs[i].tools.length;j++){
+      for(let i =0;i<cardItems.length;i++){
+        cardItems[i].parentNode.parentNode.style.backgroundColor = 'yellow';
+      }
 
-  //       liTools= document.createElement('LI');
-  //       liTools.innerHTML=`${allJobs[i].tools[j]}`
-  //       ul[i].appendChild(liTools);
-  //     }
+    }
+   
+
+    // clearBtn.addEventListener('click', ()=>{
       
-   // }
+    //    for(let i =0;i<app.children.length;i++){
+    //     //selectedItems[i].style.backgroundColor = 'pink';
+    //     //console.log(app.children[i]);
+    //    if(app.children[i].style.display == 'none'){
+    //     app.children[i].style.display = 'block';
+    //    }
+    //    }
+    // });
+   }
 
   //}// het moet dus zo zijn dat de cards weer terugfloepen als je clear drukt
+
+
+
+
+  function removeEmptySpan(){
+    const job= document.querySelectorAll('.job-description');
+
+    console.log(job[0].children[0].children[0]);
+  };
